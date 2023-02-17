@@ -1,25 +1,81 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Novo projeto</title>
     
-    <!--
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" type="text/css">
-    -->
+    {% block titulo %}
+    <title>Modelo</title>
+    {% endblock titulo %}
 
-    <link rel="stylesheet" href="static/css/estilo.css" type="text/css">
-    
+  
+    <link rel="stylesheet" href="{% static 'css/estilo.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/all.min.css' %}" type="text/css">
 
+    <script src="{% static 'js/popper.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/all.min.js' %}"></script>
+    <script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
 
 </head>
+
 <body>
-    <div class="divisao">
-        <h1 class="texto1">olá, novo projeto</h1>
+
+    {% block menu %}
+    {% if request.user.is_authenticated %}
+
+    <nav class="navbar navbar-expand-lg bg-light">
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'index' %}"><img src="{% static 'img/logocpxb.jpeg' %}" width="90" height="50" alt=""></a>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Verbas |</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Pedidos de Compra |</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Análises de PCs |</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Acompanhamento das OCs |</a></li> <!--verificar o progresso das ocs a partir da etapa2-->
+                <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Logout |</a></li> 
+                <span> Usuário: {{ request.user}}</span>
+            </ul>
+        </div>
+    </nav>    
+    {% else %}
+    <nav class="navbar navbar-expand-lg bg-light">
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'index' %}"><img src="{% static 'img/logocpxb.jpeg' %}" width="90" height="50" alt=""></a>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Login |</a></li> 
+            </ul>
+        </div>
+    </nav>    
+    {% endif %}
+    {% endblock menu %}
+
+
+    {% block info_tela %}
+    <div class="container-sm text-center bg-light">
+
+        <h3>Projeto AproVerba - Sistema de Aprovação de Verbas</h3>
     </div>
     
+    {% endblock info_tela %}
+    
+    <div class="container">
+    {% block conteudo %}    
+        <h3 class="divisao">Tela Modelo</h3>
+        <p>Conteúdo de alguma coisa</p>
+    {% endblock conteudo %}
+    </div>
+
+
+   
+
+
 </body>
 </html>
