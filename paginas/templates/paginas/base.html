@@ -1,0 +1,119 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    {% block titulo %}
+    <title>Modelo</title>
+    {% endblock titulo %}
+
+  
+    <link rel="stylesheet" href="{% static 'css/estilo.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/all.min.css' %}" type="text/css">
+
+    <script src="{% static 'js/popper.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/all.min.js' %}"></script>
+    <script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
+
+</head>
+
+
+<body>
+    <header>
+        {% block menu %}
+        {% if request.user.is_authenticated %}
+
+        <nav class="navbar navbar-expand-lg bg-light">
+            <div class="container-fluid">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                    <li class="nav-item"> 
+                        <a class="navbar-brand nav-link" href="{% url 'index' %}"><img src="{% static 'img/logocpxb.jpeg' %}" width="60" height="50" alt=""></a>
+                    </li>
+
+                    <div class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Lançamentos
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="nav-item"><a class="dropdown-item" href="{% url 'index' %}">Verbas</a></li>
+                            <li class="nav-item"><a class="dropdown-item" href="{% url 'index' %}">Pedidos de Compra</a></li>
+                    </div>
+                    
+                    <div class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Análises de PCs
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="nav-item"><a class="dropdown-item" href="{% url 'index' %}">Diretoria</a></li>
+                            <li class="nav-item"><a class="dropdown-item" href="{% url 'index' %}">Fiscal</a></li>
+                            <li class="nav-item"><a class="dropdown-item" href="{% url 'index' %}">Financeiro</a></li>
+                    </div>
+
+                    <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Acompanhamento OCs</a></li> 
+                    
+                    <div class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Realtórios
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="nav-item"><a class="dropdown-item" href="{% url 'index' %}">Verbas por setor</a></li>
+                            <li class="nav-item"><a class="dropdown-item" href="{% url 'index' %}">Painel geral</a></li>
+                    </div>
+                    
+                    <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Sobre</a></li> 
+
+                    <div class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span> Usuário: {{ request.user}}</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="nav-item"><a class="dropdown-item" href="{% url 'index' %}">Logout</a></li>
+                        </ul>
+                    </div>
+                </ul>
+            </div>
+        </nav>    
+        {% else %}
+        <nav class="navbar navbar-expand-lg bg-light">
+            <div class="container-fluid">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <div class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span> Usuário: </span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="nav-item"><a class="dropdown-item" href="{% url 'index' %}">Login</a></li>
+                        </ul>
+                    </div>
+        {% endif %}
+        {% endblock menu %}
+    </header>
+
+        {% block info_tela %}
+        <div class="container-sm text-center bg-light">
+
+            <h3>Projeto AproVerba - Sistema de Aprovação de Verbas</h3>
+        </div>
+        
+        {% endblock info_tela %}
+        
+        <div class="container">
+        {% block conteudo %}    
+            <h3 class="divisao">Tela Modelo</h3>
+            <p>Conteúdo de alguma coisa</p>
+        {% endblock conteudo %}
+        </div>
+
+
+    
+
+
+</body>
+</html>
