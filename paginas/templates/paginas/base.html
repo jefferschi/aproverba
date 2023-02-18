@@ -1,4 +1,6 @@
 {% load static %}
+{% load crispy_forms_tags %}
+
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -8,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     {% block titulo %}
-    <title>Modelo</title>
+    <title>aproverba</title>
     {% endblock titulo %}
 
   
@@ -31,50 +33,50 @@
 
         <nav class="navbar navbar-expand-lg bg-light">
             <div class="container-fluid">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav me-auto mb-lg-0">
 
                     <li class="nav-item"> 
                         <a class="navbar-brand nav-link" href="{% url 'index' %}"><img src="{% static 'img/logocpxb.jpeg' %}" width="60" height="50" alt=""></a>
                     </li>
 
-                    <div class="nav-item dropdown">
+                    <div class="nav-item dropdown mt-2">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Lançamentos
                         </a>
-                        <ul class="dropdown-menu">
+                        <ul class="dropdown-menu bg-light">
                             <li class="nav-item"><a class="dropdown-item" href="{% url 'index' %}">Verbas</a></li>
                             <li class="nav-item"><a class="dropdown-item" href="{% url 'index' %}">Pedidos de Compra</a></li>
                     </div>
                     
-                    <div class="nav-item dropdown">
+                    <div class="nav-item dropdown mt-2">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Análises de PCs
                         </a>
-                        <ul class="dropdown-menu">
-                            <li class="nav-item"><a class="dropdown-item" href="{% url 'index' %}">Diretoria</a></li>
+                        <ul class="dropdown-menu bg-light">
+                            <li class="nav-item "><a class="dropdown-item" href="{% url 'index' %}">Diretoria</a></li>
                             <li class="nav-item"><a class="dropdown-item" href="{% url 'index' %}">Fiscal</a></li>
                             <li class="nav-item"><a class="dropdown-item" href="{% url 'index' %}">Financeiro</a></li>
                     </div>
 
-                    <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Acompanhamento OCs</a></li> 
+                    <li class="nav-item mt-2"><a class="nav-link" href="{% url 'index' %}">Acompanhamento OCs</a></li> 
                     
-                    <div class="nav-item dropdown">
+                    <div class="nav-item dropdown mt-2">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Realtórios
+                            Relatórios
                         </a>
-                        <ul class="dropdown-menu">
+                        <ul class="dropdown-menu bg-light">
                             <li class="nav-item"><a class="dropdown-item" href="{% url 'index' %}">Verbas por setor</a></li>
                             <li class="nav-item"><a class="dropdown-item" href="{% url 'index' %}">Painel geral</a></li>
                     </div>
                     
-                    <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Sobre</a></li> 
+                    <li class="nav-item mt-2"><a class="nav-link" href="{% url 'index' %}"> Sobre</a></li> 
 
-                    <div class="nav-item dropdown">
+                    <div class="nav-item dropdown mt-2">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <span> Usuário: {{ request.user}}</span>
                         </a>
-                        <ul class="dropdown-menu">
-                            <li class="nav-item"><a class="dropdown-item" href="{% url 'index' %}">Logout</a></li>
+                        <ul class="dropdown-menu bg-light">
+                            <li class="nav-item"><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
                         </ul>
                     </div>
                 </ul>
@@ -84,12 +86,15 @@
         <nav class="navbar navbar-expand-lg bg-light">
             <div class="container-fluid">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <div class="nav-item dropdown">
+                    <li class="nav-item"> 
+                        <a class="navbar-brand nav-link" href="{% url 'index' %}"><img src="{% static 'img/logocpxb.jpeg' %}" width="60" height="50" alt=""></a>
+                    </li>
+                    <div class="nav-item dropdown mt-2">
                         <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <span> Usuário: </span>
                         </a>
-                        <ul class="dropdown-menu">
-                            <li class="nav-item"><a class="dropdown-item" href="{% url 'index' %}">Login</a></li>
+                        <ul class="dropdown-menu bg-light">
+                            <li class="nav-item"><a class="dropdown-item" href="{% url 'login' %}">Login</a></li>
                         </ul>
                     </div>
         {% endif %}
@@ -97,9 +102,9 @@
     </header>
 
         {% block info_tela %}
-        <div class="container-sm text-center bg-light">
+        <div class="container-sm text-center">
 
-            <h3>Projeto AproVerba - Sistema de Aprovação de Verbas</h3>
+            <h3>Sistema de Aprovação de Verbas</h3>
         </div>
         
         {% endblock info_tela %}

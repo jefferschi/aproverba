@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     # apps criados para o projeto
     'paginas.apps.PaginasConfig',
     'fluxo.apps.FluxoConfig',
+    'usuarios.apps.UsuariosConfig',
     'crispy_forms',
     'fontawesomefree',
 ]
