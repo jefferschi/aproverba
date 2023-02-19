@@ -1,0 +1,35 @@
+{% extends 'paginas/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block titulo %}
+    <title>Cadastro</title>
+{% endblock titulo %}
+
+
+{% block info_tela %}
+
+{% endblock info_tela %}
+
+
+{% block conteudo %}
+    <h3>Cadastro</h3>
+
+    <p class="lead">
+        Preencha todos os campos
+    </p>
+
+    <hr>
+
+    <form action="" method="post" enctype="multipart/form-data">
+
+        {% csrf_token %}
+
+        {{ form|crispy }}
+
+        <button type="submit" class="btn btn-primary mt-3 btn-sm">
+            <i style="margin-right: 5px" class="fa-solid fa-square-check"></i>Salvar</button>
+    </form>
+
+{% endblock conteudo %}

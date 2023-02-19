@@ -20,3 +20,15 @@ class VerbaList(GroupRequiredMixin, LoginRequiredMixin,ListView):
     group_required = u'Aprovador'
     model = Verba
     template_name = 'fluxo/listas/lista-verbas.html'
+
+
+""" classes CreateView - para adicionar registros pelo formulário"""
+class VerbaCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
+    login_url = reverse_lazy('login')
+    group_required = u'Aprovador'
+    model = Verba
+    fields = ['setor_verba','valor_verba','desc_verba','motivo_verba']
+    template_name = 'fluxo/form-cad.html'
+    success_url = reverse_lazy('lista-verbas')
+    
+
