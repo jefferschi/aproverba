@@ -15,12 +15,14 @@ from braces.views import GroupRequiredMixin
 
 
 """ classes para Verba -  ListView, CreteView, UpdateView, DeleteView, """
+
+# listar
 class VerbaList(GroupRequiredMixin, LoginRequiredMixin,ListView):
     login_url = reverse_lazy('login')
     group_required = u'Aprovador'
     model = Verba
     template_name = 'fluxo/listas/lista-verbas.html'
-
+# criar
 class VerbaCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
     login_url = reverse_lazy('login')
     group_required = u'Aprovador'
@@ -29,10 +31,19 @@ class VerbaCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
     template_name = 'fluxo/form-cad.html'
     success_url = reverse_lazy('lista-verbas')
 
+# atualizar
 class VerbaUpdate(GroupRequiredMixin,LoginRequiredMixin, UpdateView):
     login_url = reverse_lazy('login')
     group_required = u'Aprovador'
     model = Verba
     fields = ['setor_verba','valor_verba','desc_verba','motivo_verba']
     template_name = 'fluxo/form-cad.html'
+    success_url = reverse_lazy('lista-verbas')
+
+# apagar
+class VerbaDelete(GroupRequiredMixin, LoginRequiredMixin,DeleteView):
+    login_url = reverse_lazy('login')
+    group_required = u'Aprovador'
+    model = Verba
+    template_name = 'fluxo/form-excl.html'
     success_url = reverse_lazy('lista-verbas')
