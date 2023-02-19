@@ -1,0 +1,62 @@
+{% extends 'paginas/base.html' %}
+{% load static %}
+
+{% block titulo%}
+    <title>Pedidos de Compra</title>
+{% endblock titulo%}
+
+{% block info_tela%}
+
+{% endblock info_tela%}
+
+{% block conteudo %}
+<h3>Lista dos Pedidos de Compra</h3> 
+<div class="container text-right">
+    <a href="{% url 'cad-pc'%}" class="btn btn-primary btn-sm" title="Incluir novo pedido">
+    
+     <i class="fa-solid fa-square-plus mr-2"></i>Incluir</a>
+    
+</div>
+<hr>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <tr>
+            <th>OC</th>
+            <th>Data</th>
+            <th>Setor</th>
+            <th>Solicitante</th>
+            <th>Descrição</th>
+            <th>Valor</th>
+            <th>Opções</th>
+        </tr>
+        
+        {% for pc in object_list %}
+        <tr>
+            <td>#{{ pc.pk }}</td>
+            <td>{{ pc.data_solic }}</td>
+            <td>{{ pc.setor_oc }}</td>
+            <td>{{ pc.usuario_log }}</td>
+            <td>{{ pc.desc_solic }}</td>
+            <td>{{ pc.valor_solic }}</td>
+            <td>
+                <a href="{% url 'alter-pc' pc.pk %}" class="btn btn-warning btn-sm" title="Alterar Pedido de compra"><i class="fa-solid fa-pen"></i></a>
+                <a href=" {% url 'excl-pc' pc.pk %} " class="btn btn-danger btn-sm" title="Excluir Pedido de compra"><i class="fa-solid fa-trash"></i></a>
+                <a href=" {% url 'lista-pc' %} " class="btn btn-success btn-sm" title="Enviar para análise"><i class="fa-regular fa-paper-plane"></i></a>
+
+
+            </td>
+        </tr>
+
+        {% empty %}
+        <tr>
+            <td colspan="7">Pedido de Compra não encontrado.</td>
+        </tr>
+        {% endfor%}
+    </table>
+</div>
+
+{% endblock conteudo %}
+
+{% block rodape %}
+
+{% endblock rodape %}

@@ -1,0 +1,58 @@
+{% extends 'paginas/base.html' %}
+{% load static %}
+
+{% block titulo%}
+    <title>Verbas</title>
+{% endblock titulo%}
+
+{% block info_tela%}
+
+{% endblock info_tela%}
+
+
+{% block conteudo %}
+<h3>Lista de Verbas </h3>
+<div class="container container-dir">
+    <a href="#" class="btn btn-primary btn-sm" title="Incluir nova verba"> <!--href="{ url 'cad-verbas'}"-->
+        <i class="fa-solid fa-square-plus mr-2"></i> Incluir</a>
+</div>
+
+<hr>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <tr>
+            <th>ID</th>
+            <th>Data</th>
+            <th>Setor</th>
+            <th>Descrição</th>
+            <th>Valor</th>
+            <th>Opções</th>
+        </tr>
+        
+        {% for verba in object_list %}
+        <tr>
+            <td>{{ verba.pk }}</td>
+            <td>{{ verba.data_verba }}</td>
+            <td>{{ verba.setor_verba }}</td>
+            <td>{{ verba.desc_verba }}</td>
+            <td>{{ verba.valor_verba }}</td>
+            <td>
+                <a href="#" class="btn btn-warning btn-sm" title="Alterar Verba"><i class="fa-solid fa-pen"></i></a> <!--href="{ url 'alter-verbas' verba.pk }"-->
+                <a href="#" class="btn btn-danger btn-sm" title="Excluir Verba"><i class="fa-solid fa-trash"></i></a> <!--href="{ url 'excl-verbas' verba.pk } "-->
+            </td>
+        </tr>
+
+        {% empty %}
+        <tr>
+            <td colspan="6">Lista vazia</td>
+        </tr>
+        {% endfor%}
+    </table>
+</div>
+
+{% endblock conteudo %}
+
+
+{% block rodape %}
+
+{% endblock rodape %}

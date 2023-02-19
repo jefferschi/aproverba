@@ -1,0 +1,60 @@
+{% extends 'paginas/base.html' %}
+{% load static %}
+
+{% block titulo%}
+    <title>Análise Pedidos de Compra</title>
+{% endblock titulo%}
+
+{% block info_tela%}
+
+{% endblock info_tela%}
+
+{% block conteudo %}
+<h3>Análise dos Pedidos de Compra</h3> 
+<div class="container text-right">
+    <a href="{% url 'cad-pc'%}" class="btn btn-primary btn-sm" title="colocar filtros">
+         colocar filtros </a>
+</div>
+<hr>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <tr>
+            <th>OC</th>
+            <th>Data</th>
+            <th>Setor</th>
+            <th>Solicitante</th>
+            <th>Descrição</th>
+            <th>Valor</th>
+            <th>Opções</th>
+        </tr>
+        
+        {% for pc in object_list %}
+        <tr>
+            <td>#{{ pc.pk }}</td>
+            <td>{{ pc.data_solic }}</td>
+            <td>{{ pc.setor_oc }}</td>
+            <td>{{ pc.usuario_log }}</td>
+            <td>{{ pc.desc_solic }}</td>
+            <td>{{ pc.valor_solic }}</td>
+            <td>
+                <a href="{% url 'alter-pc' pc.pk %}" class="btn btn-warning btn-sm" title="Analisar Pedido de compra"><i class="fa-solid fa-magnifying-glass-dollar"></i></i></a>
+                <a href=" {% url 'excl-pc' pc.pk %} " class="btn btn-danger btn-sm" title="Negar Pedido de compra"><i class="fa-solid fa-thumbs-down"></i></a>
+                <a href=" {% url 'lista-pc' %} " class="btn btn-success btn-sm" title="Enviar para análise"><i class="fa-solid fa-money-check-dollar"></i></a>
+
+
+            </td>
+        </tr>
+
+        {% empty %}
+        <tr>
+            <td colspan="7">Pedido de Compra não encontrado.</td>
+        </tr>
+        {% endfor%}
+    </table>
+</div>
+
+{% endblock conteudo %}
+
+{% block rodape %}
+
+{% endblock rodape %}

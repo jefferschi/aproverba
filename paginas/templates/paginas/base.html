@@ -43,7 +43,7 @@
                             <span>Lançamentos</span> 
                         </a>
                         <ul class="dropdown-menu bg-light">
-                            <li class="nav-item"><a class="dropdown-item" href="{% url 'index' %}">Verbas</a></li>
+                            <li class="nav-item"><a class="dropdown-item" href="{% url 'lista-verbas' %}">Verbas</a></li>
                             <li class="nav-item"><a class="dropdown-item" href="{% url 'index' %}">Pedidos de Compra</a></li>
                     </div>
                     
@@ -112,20 +112,16 @@
         <div class="container-sm text-center">
 
             <h3>Sistema de Aprovação de Verbas</h3>
-        </div>
-        
+        </div>        
         {% endblock info_tela %}
         
         <div class="container">
         {% block conteudo %}    
-            <h3>Tela Modelo</h3>
-            <p>Conteúdo de alguma coisa</p>
+            <h5 style="margin-top: 5%;"> Faça login no menu Usuário para acessar o sistema.</h5>
         {% endblock conteudo %}
         </div>
-
-
-    
-
-
+    <footer>
+        <p style="margin-bottom: 0;"> <em> by Jefferson Schittini @2023</em></p>
+    </footer>
 </body>
 </html>

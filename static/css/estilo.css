@@ -4,13 +4,32 @@
     color: white;
 }
 .meu-menu{
-    background-color: red;
+    background-color:rgb(51, 51,255);
 }
 
 .btn-meu-menu{
-    
     background-color:rgb(51, 51,255);
     font-size: medium;
     font-weight: bold;
     margin-left: 2px;
+}
+
+.btn-meu-menu:hover{
+    background-color:rgb(102, 102,255);
+    font-size: medium;
+    font-weight: bold;
+    margin-left: 2px;
+    cursor: pointer;
+}
+
+.container-dir{
+    text-align: right;
+}
+
+footer{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color:rgb(51, 51,255);
+    text-align: center;
 }
