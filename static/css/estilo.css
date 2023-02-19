@@ -1,4 +1,16 @@
 .divisao{
+    background-color: blue;
+    text-align: center;
+    color: white;
+}
+.meu-menu{
     background-color: red;
-    text-align: right;
+}
+
+.btn-meu-menu{
+    
+    background-color:rgb(51, 51,255);
+    font-size: medium;
+    font-weight: bold;
+    margin-left: 2px;
 }

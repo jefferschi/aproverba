@@ -10,10 +10,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     {% block titulo %}
-    <title>aproverba</title>
+    <title>modelo aproverba</title>
     {% endblock titulo %}
 
-  
     <link rel="stylesheet" href="{% static 'css/estilo.css' %}" type="text/css">
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type="text/css">
     <link rel="stylesheet" href="{% static 'css/all.min.css' %}" type="text/css">
@@ -34,14 +33,14 @@
         <nav class="navbar navbar-expand-lg bg-light">
             <div class="container-fluid">
                 <ul class="navbar-nav me-auto mb-lg-0">
-
                     <li class="nav-item"> 
                         <a class="navbar-brand nav-link" href="{% url 'index' %}"><img src="{% static 'img/logocpxb.jpeg' %}" width="60" height="50" alt=""></a>
                     </li>
 
                     <div class="nav-item dropdown mt-2">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Lançamentos
+                        <a style="color:white" class="nav-link dropdown-toggle btn-meu-menu" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-solid fa-folder-plus"></i>
+                            <span>Lançamentos</span> 
                         </a>
                         <ul class="dropdown-menu bg-light">
                             <li class="nav-item"><a class="dropdown-item" href="{% url 'index' %}">Verbas</a></li>
@@ -49,8 +48,9 @@
                     </div>
                     
                     <div class="nav-item dropdown mt-2">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Análises de PCs
+                        <a style="color:white" class="nav-link dropdown-toggle btn-meu-menu" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-solid fa-magnifying-glass-chart"></i> 
+                            <span>Análises de PCs</span>
                         </a>
                         <ul class="dropdown-menu bg-light">
                             <li class="nav-item "><a class="dropdown-item" href="{% url 'index' %}">Diretoria</a></li>
@@ -58,22 +58,29 @@
                             <li class="nav-item"><a class="dropdown-item" href="{% url 'index' %}">Financeiro</a></li>
                     </div>
 
-                    <li class="nav-item mt-2"><a class="nav-link" href="{% url 'index' %}">Acompanhamento OCs</a></li> 
+                    <li class="nav-item mt-2"><a style="color:white" class="nav-link btn-meu-menu" href="{% url 'index' %}">
+                        <i class="fa-solid fa-list-check"></i>
+                        <span>Acompanhamento OCs</span></a>
+                    </li> 
                     
                     <div class="nav-item dropdown mt-2">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Relatórios
+                        <a style="color:white" class="nav-link dropdown-toggle btn-meu-menu" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-solid fa-chart-line"></i> 
+                            <span>Relatórios</span>
                         </a>
                         <ul class="dropdown-menu bg-light">
                             <li class="nav-item"><a class="dropdown-item" href="{% url 'index' %}">Verbas por setor</a></li>
                             <li class="nav-item"><a class="dropdown-item" href="{% url 'index' %}">Painel geral</a></li>
                     </div>
                     
-                    <li class="nav-item mt-2"><a class="nav-link" href="{% url 'index' %}"> Sobre</a></li> 
-
+                    <!--
+                    <li class="nav-item mt-2"><a style="color:white"  class="nav-link btn-meu-menu" href="{% url 'index' %}">
+                        <i class="fa-solid fa-circle-exclamation"></i><span>Sobre</span></a>
+                    </li> 
+                    -->
                     <div class="nav-item dropdown mt-2">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <span> Usuário: {{ request.user}}</span>
+                        <a style="color:white" class="nav-link dropdown-toggle btn-meu-menu" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-solid fa-id-card-clip"></i><span> Usuário: {{ request.user}}</span>
                         </a>
                         <ul class="dropdown-menu bg-light">
                             <li class="nav-item"><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
@@ -90,8 +97,8 @@
                         <a class="navbar-brand nav-link" href="{% url 'index' %}"><img src="{% static 'img/logocpxb.jpeg' %}" width="60" height="50" alt=""></a>
                     </li>
                     <div class="nav-item dropdown mt-2">
-                        <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <span> Usuário: </span>
+                        <a style="color:white" class="nav-link dropdown-toggle btn-meu-menu" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-solid fa-id-card-clip"></i><span> Usuário: </span>
                         </a>
                         <ul class="dropdown-menu bg-light">
                             <li class="nav-item"><a class="dropdown-item" href="{% url 'login' %}">Login</a></li>
@@ -111,7 +118,7 @@
         
         <div class="container">
         {% block conteudo %}    
-            <h3 class="divisao">Tela Modelo</h3>
+            <h3>Tela Modelo</h3>
             <p>Conteúdo de alguma coisa</p>
         {% endblock conteudo %}
         </div>
