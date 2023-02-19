@@ -36,6 +36,14 @@
                     <li class="nav-item"> 
                         <a class="navbar-brand nav-link" href="{% url 'index' %}"><img src="{% static 'img/logocpxb.jpeg' %}" width="60" height="50" alt=""></a>
                     </li>
+                    <div class="nav-item dropdown mt-2">
+                        <a style="color:white; margin-right: 20px;" class="nav-link dropdown-toggle btn-meu-menu" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-solid fa-id-card-clip"></i><span> Usuário: <em>{{ request.user}}</em></span>
+                        </a>
+                        <ul class="dropdown-menu bg-light">
+                            <li class="nav-item"><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+                        </ul>
+                    </div>
 
                     <div class="nav-item dropdown mt-2">
                         <a style="color:white" class="nav-link dropdown-toggle btn-meu-menu" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -78,14 +86,7 @@
                         <i class="fa-solid fa-circle-exclamation"></i><span>Sobre</span></a>
                     </li> 
                     -->
-                    <div class="nav-item dropdown mt-2">
-                        <a style="color:white" class="nav-link dropdown-toggle btn-meu-menu" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fa-solid fa-id-card-clip"></i><span> Usuário: {{ request.user}}</span>
-                        </a>
-                        <ul class="dropdown-menu bg-light">
-                            <li class="nav-item"><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
-                        </ul>
-                    </div>
+                    
                 </ul>
             </div>
         </nav>    
@@ -98,7 +99,7 @@
                     </li>
                     <div class="nav-item dropdown mt-2">
                         <a style="color:white" class="nav-link dropdown-toggle btn-meu-menu" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fa-solid fa-id-card-clip"></i><span> Usuário: </span>
+                            <i class="fa-solid fa-id-card-clip"></i><span> Usuário</span>
                         </a>
                         <ul class="dropdown-menu bg-light">
                             <li class="nav-item"><a class="dropdown-item" href="{% url 'login' %}">Login</a></li>
@@ -110,18 +111,23 @@
 
         {% block info_tela %}
         <div class="container-sm text-center">
-
             <h3>Sistema de Aprovação de Verbas</h3>
         </div>        
         {% endblock info_tela %}
         
         <div class="container">
         {% block conteudo %}    
-            <h5 style="margin-top: 5%;"> Faça login no menu Usuário para acessar o sistema.</h5>
+            {% if request.user.is_authenticated %}
+            {% else %}
+                <h5 style="margin-top: 5%;"> Faça login no menu Usuário para acessar o sistema.</h5>
+            {% endif %}
         {% endblock conteudo %}
         </div>
+        
+    {% block rodape %}
     <footer>
-        <p style="margin-bottom: 0;"> <em> @2023 Grupo Capixaba - Sistema de Aprovação de Verbas - by Jefferson Schittini</em></p>
+        <p style="margin-bottom: 0;"> <em> @2023 Grupo Capixaba - Sistema de Aprovação de Verbas - Desenvolvido por Jefferson Schittini</em></p>
     </footer>
+    {% endblock rodape %}
 </body>
 </html>
