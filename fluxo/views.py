@@ -106,3 +106,11 @@ class PCDelete(GroupRequiredMixin, LoginRequiredMixin,DeleteView):
     model = PedidoCompra
     template_name = 'fluxo/form-excl.html'
     success_url = reverse_lazy('lista-pc')
+
+######################################################################################
+""" classes para Análise de PCs (aprovação, fiscal e financeiro) """
+class PCAnaliseList(GroupRequiredMixin, LoginRequiredMixin,ListView):
+    login_url = reverse_lazy('login')
+    group_required = u'Aprovador' #ver se consigo colocar mais de um grupo com uma lista, ou dicionario
+    model = PedidoCompra
+    template_name = 'fluxo/listas/lista-analise-pc.html'

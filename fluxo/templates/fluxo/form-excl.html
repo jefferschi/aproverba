@@ -25,13 +25,13 @@
 
             {% if object.nome_classe == "Verba" %}
 
-                no valor de <b>{{ object.valor_verba }} {{ object.valor_solic }}</b> 
-                referente à <b>{{ object.motivo_verba }} {{ object.motivo_solic }} </b>?
+                no valor de <b>R$ {{ object.valor_verba }}</b> 
+                referente à <b>{{ object.motivo_verba }}</b>?
 
             {% else %}
 
-                no valor de <b> {{ object.valor_solic }}</b> 
-                referente à <b> {{ object.motivo_solic }} </b>?
+                no valor de <b>R$ {{ object.valor_solic }}</b> 
+                referente à <b>{{ object.motivo_solic }}</b>?
         
             {% endif %}
 

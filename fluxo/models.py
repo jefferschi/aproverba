@@ -91,7 +91,7 @@ class PedidoCompra(models.Model):
 
 
     def __str__(self):
-        return "OC #{} - Solicitação de {}".format(self.id,self.usuario_log)
+        return "OC #{} - Solicitação para {}".format(self.id,self.setor_oc)
     
     """ atriui a uma variável o nome da classe. Isso pode ser usado em um template para identificar a 
     classe que está chamando o formulário e condicionar as ações"""

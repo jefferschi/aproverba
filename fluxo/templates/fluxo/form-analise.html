@@ -1,0 +1,35 @@
+{% extends 'paginas/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block titulo %}
+    <title>Análise PCs</title>
+{% endblock titulo %}
+
+
+{% block info_tela %}
+
+{% endblock info_tela %}
+
+
+{% block conteudo %}
+    <h3>Alterar Cadastros/Solicitações</h3>
+
+    <p class="lead">
+        Altere os campos desejados.
+    </p>
+
+    <hr>
+
+    <form action="" method="post" enctype="multipart/form-data">
+
+        {% csrf_token %}
+
+        {{ form|crispy }}
+
+        <button type="submit" class="btn btn-primary mt-3 btn-sm" >
+            <i class="fa-solid fa-money-check-dollar-pen"></i> Aprovar</button>
+    </form>
+
+{% endblock conteudo %}
