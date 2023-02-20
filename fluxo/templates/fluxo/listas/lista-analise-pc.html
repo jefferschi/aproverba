@@ -9,10 +9,11 @@
 
 {% endblock info_tela%}
 
+
 {% block conteudo %}
 <h3 style="margin-top: 5px;">Análise dos Pedidos de Compra</h3> 
 <div class="container container-dir">
-    <a href="{# url 'cad-pc' #}" class="btn btn-primary btn-sm" title="colocar filtros">
+    <a href="{# url 'index' #}" class="btn btn-primary btn-sm" title="colocar filtros">
          colocar filtros </a>
 </div>
 <hr>
@@ -37,9 +38,9 @@
             <td>{{ pc.desc_solic }}</td>
             <td>{{ pc.valor_solic }}</td>
             <td>
-                <a href="{% url 'alter-pc' pc.pk %}" class="btn btn-warning btn-sm" title="Analisar Pedido de compra"><i class="fa-solid fa-magnifying-glass-dollar"></i></i></a>
-                <a href=" {% url 'excl-pc' pc.pk %} " class="btn btn-danger btn-sm" title="Negar Pedido de compra"><i class="fa-solid fa-thumbs-down"></i></a>
-                <a href=" {% url 'lista-pc' %} " class="btn btn-success btn-sm" title="Enviar para análise"><i class="fa-solid fa-money-check-dollar"></i></a>
+                <a href="{# url 'index' pc.pk #}" class="btn btn-warning btn-sm" title="Analisar Pedido de compra"><i class="fa-solid fa-magnifying-glass-dollar"></i></i></a>
+                <a href=" {# url 'index' pc.pk #} " class="btn btn-danger btn-sm" title="Negar Pedido de compra"><i class="fa-solid fa-thumbs-down"></i></a>
+                <a href=" {# url 'index' pc.pk #} " class="btn btn-success btn-sm" title="Enviar para análise"><i class="fa-solid fa-money-check-dollar"></i></a>
 
 
             </td>

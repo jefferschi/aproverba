@@ -2,19 +2,22 @@
 
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
+
+# modelos do projeto
 from .models import Verba, PedidoCompra
 
 # para requerer login ao acessar as páginas, mesmo digitando o endereço no navegador
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-# redireciona o usuário depois de fazer algo
-from django.urls import reverse_lazy
-
 # para gerenciar permissões por grupos. Pode ser feito pelo gerenciador do djaango, mas aqui será pelo braces
 from braces.views import GroupRequiredMixin
 
+# redireciona o usuário depois de fazer algo
+from django.urls import reverse_lazy
+
 
 ######################################################################################
+
 """ classes para Verba -  ListView, CreteView, UpdateView, DeleteView, """
 
 # listar
@@ -72,7 +75,7 @@ class PCCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
     group_required = u'Solicitante'
     model = PedidoCompra
     fields=['data_solic','setor_oc','desc_solic','motivo_solic',
-            'valor_solic','anexos','etapa_oc','status_oc'
+            'valor_solic','anexos'
     ]
     template_name = 'fluxo/form-cad.html'
     success_url = reverse_lazy('lista-pc')

@@ -84,8 +84,8 @@ class PedidoCompra(models.Model):
     data_fis = models.DateTimeField(verbose_name='Liberação Fiscal', blank=True, null=True)
     motivo_fis = models.TextField(verbose_name='Motivo Fiscal', max_length=1000, blank=True, null=True, help_text='Escreva detalhes da devolutiva')
 
-    etapa_oc = models.CharField(verbose_name='Etapa', choices=ETAPAS_CHOICES, max_length=50)
-    status_oc = models.CharField(verbose_name='Status', choices=STATUS_CHOICES, max_length=50)
+    etapa_oc = models.CharField(verbose_name='Etapa', choices=ETAPAS_CHOICES, max_length=50, default='1')
+    status_oc = models.CharField(verbose_name='Status', choices=STATUS_CHOICES, max_length=50, default='ABE')
 
     data_fim_oc = models.DateTimeField(verbose_name='Data Encerramento', null=True, blank=True)
 
