@@ -64,3 +64,24 @@ class PCList(GroupRequiredMixin, LoginRequiredMixin,ListView):
         self.object_list = PedidoCompra.objects.filter(usuario_log=self.request.user).filter(status_oc='ABE')
 
         return self.object_list
+
+class PCCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
+    login_url = reverse_lazy('login')
+    group_required = u'Solicitante'
+    model = PedidoCompra
+    fields=['data_solic','setor_oc','desc_solic','motivo_solic',
+            'valor_solic','anexos','etapa_oc','status_oc'
+    ]
+    template_name = 'fluxo/form-cad.html'
+    success_url = reverse_lazy('lista-pc')
+
+    # para salvar o usuario_log (e todos os demais campos) sem precisar selecionar em uma caixa de seleção para usuario, neste caso
+    def form_valid(self, form):
+
+        # antes do super(), o objeto ainda não foi criado, onde será feito o script para salvar o usuario logado no campo usuario_log
+        form.instance.usuario_log = self.request.user
+
+        url = super().form_valid(form)
+
+        # objeto já criado 
+        return url

@@ -1,7 +1,7 @@
 from django.urls import path
 
 from .views import VerbaList, VerbaCreate, VerbaUpdate, VerbaDelete
-from .views import PCList
+from .views import PCList, PCCreate
 
 urlpatterns = [
     path('verbas/listar/', VerbaList.as_view(), name='lista-verbas'),
@@ -10,4 +10,5 @@ urlpatterns = [
     path('verbas/excluir/<int:pk>/', VerbaDelete.as_view(), name='excl-verbas'),
 
     path('pc/listar/', PCList.as_view(), name='lista-pc'),
+    path('pc/cadastrar/', PCCreate.as_view(), name='cad-pc'),
 ]
