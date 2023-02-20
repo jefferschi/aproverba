@@ -1,0 +1,33 @@
+{% extends 'paginas/base.html' %}
+{% load static %}
+
+{% block titulo %}
+    <title>Envio par análise</title>
+{% endblock titulo %}
+
+
+{% block info_tela %}
+    <h3 style="margin-top: 10px; text-align: center;">Envio de PC para análise de aprovação.</h3>
+{% endblock info_tela %}
+
+
+{% block conteudo %}
+
+    <p style="margin-top: 20px;" class="lead">
+        <b>ATENÇÃO!</b> Após clicar no botão <b class="btn-success">Enviar</b>, 
+        o pedido não poderá mais ser alterado pelo solicitante.
+    </p>
+    <hr>
+
+    <form action="" method="post" enctype="multipart/form-data">
+        <p style="font-size: large;">Deseja enviar <strong>{{ object }}</strong>
+            no valor de <b>R$ {{ object.valor_solic }}</b> 
+            referente à <b>{{ object.motivo_solic }}</b> para análise de aprovação? 
+        </p>
+        {% csrf_token %}
+
+        <button type="submit" class="btn btn-success mt-3 btn-sm" >
+            <i class="fa-regular fa-paper-plane"></i> Enviar</button>
+    </form>
+
+{% endblock conteudo %}

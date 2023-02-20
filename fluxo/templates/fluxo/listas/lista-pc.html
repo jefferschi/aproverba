@@ -39,21 +39,17 @@
             <td>
                 <a href="{% url 'alter-pc' pc.pk %}" class="btn btn-warning btn-sm" title="Alterar Pedido de compra"><i class="fa-solid fa-pen"></i></a>
                 <a href=" {% url 'excl-pc' pc.pk %} " class="btn btn-danger btn-sm" title="Excluir Pedido de compra"><i class="fa-solid fa-trash"></i></a>
-                <a href=" {# url 'lista-pc' #} " class="btn btn-success btn-sm" title="Enviar para análise"><i class="fa-regular fa-paper-plane"></i></a>
+                <a href=" {% url 'envia-pc' pc.pk %} " class="btn btn-success btn-sm" title="Enviar para análise"><i class="fa-regular fa-paper-plane"></i></a>
 
 
             </td>
         </tr>
         {% empty %}
         <tr>
-            <td colspan="7">Pedido de Compra não encontrado.</td>
+            <td colspan="7">Não há pedidos de compra em Aberto para este solicitante.</td>
         </tr>
         {% endfor%}
     </table>
 </div>
 
 {% endblock conteudo %}
-
-{% block rodape %}
-
-{% endblock rodape %}

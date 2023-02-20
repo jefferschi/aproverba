@@ -90,6 +90,7 @@ class PCCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
 
         # recebe o setor do usuário logado, referente ao gestor do setor no cadastro de setor
         setor = Setor.objects.get(gestor_setor=self.request.user)
+        # Define o valor do campo setor_oc como o setor encontrado
         form.instance.setor_oc = setor
 
         url = super().form_valid(form)
@@ -118,8 +119,31 @@ class PCDelete(GroupRequiredMixin, LoginRequiredMixin,DeleteView):
     template_name = 'fluxo/form-excl.html'
     success_url = reverse_lazy('lista-pc')
 
+# enviar para análise
+class PCEnvia(GroupRequiredMixin, LoginRequiredMixin,UpdateView):
+    login_url = reverse_lazy('login')
+    group_required = u'Solicitante'
+    model = PedidoCompra
+    fields=[]
+    template_name = 'fluxo/form-envia-pc.html'
+    success_url = reverse_lazy('lista-pc')
+
+    def form_valid(self, form):
+
+        # atribuir a próxima etapa e novo status à oc - vai para aprovação
+        form.instance.etapa_oc = '2'
+        form.instance.status_oc = 'ANL'
+
+        url = super().form_valid(form)
+
+        # objeto já criado 
+        return url
+
+
 ######################################################################################
 """ classes para Análise de PCs (aprovação, fiscal e financeiro) """
+
+# lista dos pedidos para análise
 class PCAnaliseList(GroupRequiredMixin, LoginRequiredMixin,ListView):
     login_url = reverse_lazy('login')
     group_required = u'Aprovador' #ver se consigo colocar mais de um grupo com uma lista, ou dicionario
