@@ -26,6 +26,14 @@ class Verba(models.Model):
     def __str__(self):
         return "Verba #{} - {} ({})".format(str(self.id),self.desc_verba, self.setor_verba)
 
+    """ atriui a uma variável o nome da classe. Isso pode ser usado em um template para identificar a 
+    classe que está chamando o formulário e condicionar as ações"""
+    def nome_classe(self):
+        nome_modelo = Verba()
+        nome_da_classe = nome_modelo._meta.model_name
+        return nome_da_classe
+
+
 class PedidoCompra(models.Model):
     # para a constante abaixo e demais para models.Charfield(choices), ver melhor prática em https://docs.djangoproject.com/en/4.1/ref/models/fields/#choices
    
@@ -81,5 +89,13 @@ class PedidoCompra(models.Model):
 
     data_fim_oc = models.DateTimeField(verbose_name='Data Encerramento', null=True, blank=True)
 
+
     def __str__(self):
         return "OC #{} - Solicitação de {}".format(self.id,self.usuario_log)
+    
+    """ atriui a uma variável o nome da classe. Isso pode ser usado em um template para identificar a 
+    classe que está chamando o formulário e condicionar as ações"""
+    def nome_classe(self):
+        nome_modelo = PedidoCompra()
+        nome_da_classe = nome_modelo._meta.model_name
+        return nome_da_classe

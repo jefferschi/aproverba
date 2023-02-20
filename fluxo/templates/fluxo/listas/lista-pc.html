@@ -37,8 +37,8 @@
             <td>{{ pc.desc_solic }}</td>
             <td>{{ pc.valor_solic }}</td>
             <td>
-                <a href="{# url 'alter-pc' pc.pk #}" class="btn btn-warning btn-sm" title="Alterar Pedido de compra"><i class="fa-solid fa-pen"></i></a>
-                <a href=" {# url 'excl-pc' pc.pk #} " class="btn btn-danger btn-sm" title="Excluir Pedido de compra"><i class="fa-solid fa-trash"></i></a>
+                <a href="{% url 'alter-pc' pc.pk %}" class="btn btn-warning btn-sm" title="Alterar Pedido de compra"><i class="fa-solid fa-pen"></i></a>
+                <a href=" {% url 'excl-pc' pc.pk %} " class="btn btn-danger btn-sm" title="Excluir Pedido de compra"><i class="fa-solid fa-trash"></i></a>
                 <a href=" {# url 'lista-pc' #} " class="btn btn-success btn-sm" title="Enviar para análise"><i class="fa-regular fa-paper-plane"></i></a>
 
 

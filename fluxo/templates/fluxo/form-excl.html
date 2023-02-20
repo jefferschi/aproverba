@@ -21,9 +21,20 @@
     <hr>
 
     <form action="" method="post" enctype="multipart/form-data">
+        <p style="font-size: large;">Deseja excluir <strong>{{ object }}</strong> 
 
-        <p style="font-size: large;">Deseja excluir <strong>{{ object }}</strong> no valor de <b>{{ object.valor_verba }}</b> 
-            referente à <b>{{ object.motivo_verba }}</b>? 
+            {% if object.nome_classe == "Verba" %}
+
+                no valor de <b>{{ object.valor_verba }} {{ object.valor_solic }}</b> 
+                referente à <b>{{ object.motivo_verba }} {{ object.motivo_solic }} </b>?
+
+            {% else %}
+
+                no valor de <b> {{ object.valor_solic }}</b> 
+                referente à <b> {{ object.motivo_solic }} </b>?
+        
+            {% endif %}
+
         </p>
 
         {% csrf_token %}

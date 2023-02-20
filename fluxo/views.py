@@ -23,6 +23,7 @@ class VerbaList(GroupRequiredMixin, LoginRequiredMixin,ListView):
     group_required = u'Aprovador'
     model = Verba
     template_name = 'fluxo/listas/lista-verbas.html'
+
 # criar
 class VerbaCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
     login_url = reverse_lazy('login')
@@ -65,6 +66,7 @@ class PCList(GroupRequiredMixin, LoginRequiredMixin,ListView):
 
         return self.object_list
 
+# criar
 class PCCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
     login_url = reverse_lazy('login')
     group_required = u'Solicitante'
@@ -85,3 +87,22 @@ class PCCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
 
         # objeto já criado 
         return url
+
+# atualizar
+class PCUpdate(GroupRequiredMixin, LoginRequiredMixin,UpdateView):
+    login_url = reverse_lazy('login')
+    group_required = u'Solicitante'
+    model = PedidoCompra
+    fields=['setor_oc','desc_solic','motivo_solic',
+            'valor_solic','anexos','etapa_oc','status_oc'
+    ]
+    template_name = 'fluxo/form-cad.html'
+    success_url = reverse_lazy('lista-pc')
+
+# apagar
+class PCDelete(GroupRequiredMixin, LoginRequiredMixin,DeleteView):
+    login_url = reverse_lazy('login')
+    group_required = u'Solicitante'
+    model = PedidoCompra
+    template_name = 'fluxo/form-excl.html'
+    success_url = reverse_lazy('lista-pc')
