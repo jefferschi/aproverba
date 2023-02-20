@@ -143,9 +143,15 @@ class PCEnvia(GroupRequiredMixin, LoginRequiredMixin,UpdateView):
 ######################################################################################
 """ classes para Análise de PCs (aprovação, fiscal e financeiro) """
 
-# lista dos pedidos para análise
-class PCAnaliseList(GroupRequiredMixin, LoginRequiredMixin,ListView):
+# lista dos pedidos para aprovação diretoria
+class PCAprovaList(GroupRequiredMixin, LoginRequiredMixin,ListView):
     login_url = reverse_lazy('login')
-    group_required = u'Aprovador' #ver se consigo colocar mais de um grupo com uma lista, ou dicionario
+    group_required = u'Aprovador'
     model = PedidoCompra
     template_name = 'fluxo/listas/lista-analise-pc.html'
+    
+    def get_queryset(self):
+        # pega todos os objetos em pedido de compra e atribui a object_list, usada na lista html, para fazer o filtro do status
+        self.object_list = PedidoCompra.objects.filter(status_oc='ANL')
+
+        return self.object_list
