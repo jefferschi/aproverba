@@ -4,7 +4,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
 
 # modelos do projeto
-from .models import Verba, PedidoCompra
+from .models import Verba, PedidoCompra, Setor
 
 # para requerer login ao acessar as páginas, mesmo digitando o endereço no navegador
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -74,7 +74,7 @@ class PCCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
     login_url = reverse_lazy('login')
     group_required = u'Solicitante'
     model = PedidoCompra
-    fields=['data_solic','setor_oc','desc_solic','motivo_solic',
+    fields=['desc_solic','motivo_solic',
             'valor_solic','anexos'
     ]
     template_name = 'fluxo/form-cad.html'
@@ -84,7 +84,13 @@ class PCCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
     def form_valid(self, form):
 
         # antes do super(), o objeto ainda não foi criado, onde será feito o script para salvar o usuario logado no campo usuario_log
+
+        # recebe o usuário logado no campo usuário do pedido
         form.instance.usuario_log = self.request.user
+
+        # recebe o setor do usuário logado, referente ao gestor do setor no cadastro de setor
+        setor = Setor.objects.get(gestor_setor=self.request.user)
+        form.instance.setor_oc = setor
 
         url = super().form_valid(form)
 
@@ -97,10 +103,12 @@ class PCUpdate(GroupRequiredMixin, LoginRequiredMixin,UpdateView):
     group_required = u'Solicitante'
     model = PedidoCompra
     fields=['setor_oc','desc_solic','motivo_solic',
-            'valor_solic','anexos','etapa_oc','status_oc'
+            'valor_solic','anexos'
     ]
     template_name = 'fluxo/form-cad.html'
     success_url = reverse_lazy('lista-pc')
+
+    # colocar uma função para salvar a data toda vez que alterar o registro.
 
 # apagar
 class PCDelete(GroupRequiredMixin, LoginRequiredMixin,DeleteView):

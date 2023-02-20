@@ -11,6 +11,7 @@ def anexar_em(instance, filename):
 class Setor(models.Model):
     # colocar um campo para receber o responsável pelo setor, esse campo vai buscar da tabela usuários padrão do django
     setor_desc = models.CharField(verbose_name='Setor', max_length=100, unique=True)
+    gestor_setor = models.ForeignKey(User, on_delete=models.PROTECT, verbose_name='Gestor', blank=True, null=True)
 
     def __str__(self):
         return self.setor_desc
