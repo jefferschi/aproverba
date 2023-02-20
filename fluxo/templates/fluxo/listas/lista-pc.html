@@ -10,12 +10,10 @@
 {% endblock info_tela%}
 
 {% block conteudo %}
-<h3>Lista dos Pedidos de Compra</h3> 
-<div class="container text-right">
-    <a href="{% url 'cad-pc'%}" class="btn btn-primary btn-sm" title="Incluir novo pedido">
-    
-     <i class="fa-solid fa-square-plus mr-2"></i>Incluir</a>
-    
+<h3 style="margin-top: 5px;">Lista de Pedidos de Compra</h3>
+<div class="container container-dir">
+    <a href="{# url 'cad-pc' #}" class="btn btn-primary btn-sm" title="Incluir novo pedido">
+        <i style="margin-right: 5px" class="fa-solid fa-square-plus"></i>Incluir</a>
 </div>
 <hr>
 <div class="table-responsive">
@@ -46,7 +44,6 @@
 
             </td>
         </tr>
-
         {% empty %}
         <tr>
             <td colspan="7">Pedido de Compra não encontrado.</td>

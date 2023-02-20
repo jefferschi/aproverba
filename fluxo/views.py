@@ -14,6 +14,7 @@ from django.urls import reverse_lazy
 from braces.views import GroupRequiredMixin
 
 
+######################################################################################
 """ classes para Verba -  ListView, CreteView, UpdateView, DeleteView, """
 
 # listar
@@ -47,3 +48,19 @@ class VerbaDelete(GroupRequiredMixin, LoginRequiredMixin,DeleteView):
     model = Verba
     template_name = 'fluxo/form-excl.html'
     success_url = reverse_lazy('lista-verbas')
+
+######################################################################################
+""" classes para Pedidos de Compra -  ListView, CreteView, UpdateView, DeleteView, """
+
+# listar
+class PCList(GroupRequiredMixin, LoginRequiredMixin,ListView):
+    login_url = reverse_lazy('login')
+    group_required = u'Solicitante'
+    model = PedidoCompra
+    template_name = 'fluxo/listas/lista-pc.html'
+
+    def get_queryset(self):
+        # pega todos os objetos em pedido de compra e atribui a object_list, usada na lista html, para fazer o filtro do status
+        self.object_list = PedidoCompra.objects.filter(usuario_log=self.request.user).filter(status_oc='ABE')
+
+        return self.object_list
