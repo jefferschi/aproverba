@@ -147,6 +147,7 @@ class PCEnvia(GroupRequiredMixin, LoginRequiredMixin,UpdateView):
 ######################################################################################
 """ classes para Análise de PCs (aprovação, fiscal e financeiro) """
 
+#### aprovação diretoria
 # lista dos pedidos para aprovação diretoria
 class PCAprovaList(GroupRequiredMixin, LoginRequiredMixin,ListView):
     login_url = reverse_lazy('login')
@@ -170,7 +171,8 @@ class PCAnaliseAprov(GroupRequiredMixin, LoginRequiredMixin,UpdateView):
     template_name = 'fluxo/form-analise.html'
     success_url = reverse_lazy('lista-analise-pc')
 
-# aprova e envia para Fiscal
+
+# diretoria aprova e envia para Fiscal
 class PCAprova(GroupRequiredMixin, LoginRequiredMixin,UpdateView):
     login_url = reverse_lazy('login')
     group_required = u'Aprovador'
@@ -191,7 +193,7 @@ class PCAprova(GroupRequiredMixin, LoginRequiredMixin,UpdateView):
         # converter a hora local em UTC
         hora_utc = hora_local.astimezone(timezone.utc)
         form.instance.data_aprov = hora_utc
-
+       
         """
         também não deu certo
         timezone.activate(pytz.timezone('America/Sao_Paulo'))
@@ -207,3 +209,18 @@ class PCAprova(GroupRequiredMixin, LoginRequiredMixin,UpdateView):
 
         # objeto já criado 
         return url
+
+#### aprovação fiscal
+
+# lista dos pedidos para aprovação diretoria
+class PCFisList(GroupRequiredMixin, LoginRequiredMixin,ListView):
+    login_url = reverse_lazy('login')
+    group_required = u'Fiscal'
+    model = PedidoCompra
+    template_name = 'fluxo/listas/lista-analise-fis-pc.html'
+    
+    def get_queryset(self):
+        # pega todos os objetos em pedido de compra e atribui a object_list, usada na lista html, para fazer o filtro do status
+        self.object_list = PedidoCompra.objects.filter(status_oc='LIB', etapa_oc='3')
+
+        return self.object_list
