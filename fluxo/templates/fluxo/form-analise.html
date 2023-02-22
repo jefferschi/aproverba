@@ -14,15 +14,25 @@
 
 
 {% block conteudo %}
+    <div class="card">
+        <div style="text-align: center; font-size: large; font-weight: bold;" class="card-header">
+            Informações da solicitação
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item"> <b>Data da  Solicitação:</b> {{ object.data_solic }}</li>
+            <li class="list-group-item"> <b>Valor Solcitado:</b> R$ {{ object.valor_solic }}</li>
+            <li class="list-group-item" > <b>Setor:</b> {{ object.setor_oc }}</li>
+            <li class="list-group-item"> <b>Descrição do pedido:</b> {{ object.desc_solic }}</li>
+            <li class="list-group-item"> <b>Motivo:</b> {{ object.motivo_solic }}</li>
+            <li class="list-group-item"> <b>Baixar arquivo:</b> {{ object.anexos }}</li>
 
-    <p class="lead">
-        Confira as informações do solicitante.
-    </p>
-    <p> colocar as informações do pedido de compra</p>
+        </ul>
+
+    </div>
     <hr>
 
     <p class="lead">
-        Preencha os campos abaixo antes de salvar a análise do pedido.
+        Preencha os campos abaixo se deseja liberar o pedido.
     </p>
     <hr>
 

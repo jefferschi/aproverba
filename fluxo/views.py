@@ -15,6 +15,8 @@ from braces.views import GroupRequiredMixin
 # redireciona o usuário depois de fazer algo
 from django.urls import reverse_lazy
 
+from django.utils import timezone
+
 
 ######################################################################################
 
@@ -178,8 +180,10 @@ class PCAprova(GroupRequiredMixin, LoginRequiredMixin,UpdateView):
     def form_valid(self, form):
 
         # atribuir a próxima etapa e novo status à oc - vai para fiscal
+        form.instance.data_aprov = timezone.now()
         form.instance.etapa_oc = '3'
         form.instance.status_oc = 'LIB'
+        
 
         url = super().form_valid(form)
 
