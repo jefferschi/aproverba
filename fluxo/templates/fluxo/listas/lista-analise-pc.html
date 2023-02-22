@@ -12,10 +12,7 @@
 
 {% block conteudo %}
 <h3 style="margin-top: 5px;">Análise dos Pedidos de Compra</h3> 
-<div class="container container-dir">
-    <a href="{# url 'index' #}" class="btn btn-primary btn-sm" title="colocar filtros">
-         colocar filtros </a>
-</div>
+    <p> colocar um caixa de seleção de filtro por setor</p>
 <hr>
 <div class="table-responsive">
     <table class="table table-striped">
@@ -25,7 +22,9 @@
             <th>Setor</th>
             <th>Solicitante</th>
             <th>Descrição</th>
-            <th>Valor</th>
+            <th>Valor Solic.</th>
+            <th>Valor Lib.</th>
+
             <th>Opções</th>
         </tr>
         
@@ -37,10 +36,11 @@
             <td>{{ pc.usuario_log }}</td>
             <td>{{ pc.desc_solic }}</td>
             <td>{{ pc.valor_solic }}</td>
+            <td>{{ pc.valor_aprov }}</td>
             <td>
-                <a href="{# url 'index' pc.pk #}" class="btn btn-warning btn-sm" title="Analisar Pedido de compra"><i class="fa-solid fa-magnifying-glass-dollar"></i></i></a>
-                <a href=" {# url 'index' pc.pk #} " class="btn btn-danger btn-sm" title="Negar Pedido de compra"><i class="fa-solid fa-thumbs-down"></i></a>
-                <a href=" {# url 'index' pc.pk #} " class="btn btn-success btn-sm" title="Enviar para análise"><i class="fa-solid fa-money-check-dollar"></i></a>
+                <a href="{% url 'aprova-pc' pc.pk %}" class="btn btn-warning btn-sm" title="Analisar PC"><i class="fa-solid fa-magnifying-glass-dollar"></i></i></a>
+                <a href=" {% url 'envia-aprova-pc' pc.pk %} " class="btn btn-success btn-sm" title="Aprovar PC"><i class="fa-solid fa-thumbs-up"></i></i></a>
+                <a href=" {# url 'index' pc.pk #} " class="btn btn-danger btn-sm" title="Negar ou Retornar PC"><i class="fa-solid fa-thumbs-down"></i></a>
 
 
             </td>

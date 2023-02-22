@@ -54,7 +54,7 @@ class VerbaDelete(GroupRequiredMixin, LoginRequiredMixin,DeleteView):
     success_url = reverse_lazy('lista-verbas')
 
 ######################################################################################
-""" classes para Pedidos de Compra -  ListView, CreteView, UpdateView, DeleteView, """
+""" classes para Pedidos de Compra nível de acesso 'Solicitante' -  ListView, CreteView, UpdateView, DeleteView, """
 
 # listar
 class PCList(GroupRequiredMixin, LoginRequiredMixin,ListView):
@@ -152,6 +152,36 @@ class PCAprovaList(GroupRequiredMixin, LoginRequiredMixin,ListView):
     
     def get_queryset(self):
         # pega todos os objetos em pedido de compra e atribui a object_list, usada na lista html, para fazer o filtro do status
-        self.object_list = PedidoCompra.objects.filter(status_oc='ANL')
+        self.object_list = PedidoCompra.objects.filter(status_oc='ANL', etapa_oc='2')
 
         return self.object_list
+
+# detalhes do pedido para aprocação da diretoria
+class PCAnaliseAprov(GroupRequiredMixin, LoginRequiredMixin,UpdateView):
+    login_url = reverse_lazy('login')
+    group_required = u'Aprovador'
+    model = PedidoCompra
+    fields=['valor_aprov', 'motivo_aprov'
+    ]
+    template_name = 'fluxo/form-analise.html'
+    success_url = reverse_lazy('lista-analise-pc')
+
+# aprova e envia para Fiscal
+class PCAprova(GroupRequiredMixin, LoginRequiredMixin,UpdateView):
+    login_url = reverse_lazy('login')
+    group_required = u'Aprovador'
+    model = PedidoCompra
+    fields=[]
+    template_name = 'fluxo/form-aprova-pc.html'
+    success_url = reverse_lazy('lista-analise-pc')
+
+    def form_valid(self, form):
+
+        # atribuir a próxima etapa e novo status à oc - vai para fiscal
+        form.instance.etapa_oc = '3'
+        form.instance.status_oc = 'LIB'
+
+        url = super().form_valid(form)
+
+        # objeto já criado 
+        return url

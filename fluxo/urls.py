@@ -2,7 +2,7 @@ from django.urls import path
 
 from .views import VerbaList, VerbaCreate, VerbaUpdate, VerbaDelete
 from .views import PCList, PCCreate, PCUpdate, PCDelete, PCEnvia
-from .views import PCAprovaList
+from .views import PCAprovaList, PCAnaliseAprov, PCAprova
 
 
 urlpatterns = [
@@ -21,7 +21,8 @@ urlpatterns = [
     path('pc/enviar/<int:pk>/', PCEnvia.as_view(), name='envia-pc'),
 
     # análises de PCs
-    path('pc/aprova/listar/', PCAprovaList.as_view(), name='lista-analise-pc'),
-    
+    path('pc/analise/aprova/listar/', PCAprovaList.as_view(), name='lista-analise-pc'),
+    path('pc/analise/aprova/<int:pk>', PCAnaliseAprov.as_view(), name='aprova-pc'),
+    path('pc/analise/aprova/enviar/<int:pk>/', PCAprova.as_view(), name='envia-aprova-pc'),
 
 ]

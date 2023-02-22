@@ -9,17 +9,21 @@
 
 
 {% block info_tela %}
-
+    <h3 style="margin-top: 10px; text-align: center;">Análise de Pedidos de Compra</h3>
 {% endblock info_tela %}
 
 
 {% block conteudo %}
-    <h3>Alterar Cadastros/Solicitações</h3>
 
     <p class="lead">
-        Altere os campos desejados.
+        Confira as informações do solicitante.
     </p>
+    <p> colocar as informações do pedido de compra</p>
+    <hr>
 
+    <p class="lead">
+        Preencha os campos abaixo antes de salvar a análise do pedido.
+    </p>
     <hr>
 
     <form action="" method="post" enctype="multipart/form-data">
@@ -28,8 +32,8 @@
 
         {{ form|crispy }}
 
-        <button type="submit" class="btn btn-primary mt-3 btn-sm" >
-            <i class="fa-solid fa-money-check-dollar-pen"></i> Aprovar</button>
+        <button type="submit" class="btn btn-primary mt-3 btn-sm">
+            <i style="margin-right: 5px" class="fa-solid fa-square-check"></i>Salvar</button>
     </form>
 
 {% endblock conteudo %}
