@@ -3,7 +3,7 @@ from django.urls import path
 from .views import VerbaList, VerbaCreate, VerbaUpdate, VerbaDelete
 from .views import PCList, PCCreate, PCUpdate, PCDelete, PCEnvia
 from .views import PCAprovaList, PCAnaliseAprov, PCAprova
-from .views import PCFisList
+from .views import PCFisList, PCAnaliseFis
 
 urlpatterns = [
 
@@ -27,5 +27,6 @@ urlpatterns = [
 
     # análises de PCs para fiscal
     path('pc/analise/fiscal/listar/', PCFisList.as_view(), name='lista-analise-fis-pc'),
+    path('pc/analise/fiscal/<int:pk>', PCAnaliseFis.as_view(), name='analise-fis-pc'),
 
 ]

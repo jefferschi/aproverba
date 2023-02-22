@@ -210,6 +210,7 @@ class PCAprova(GroupRequiredMixin, LoginRequiredMixin,UpdateView):
         # objeto já criado 
         return url
 
+
 #### aprovação fiscal
 
 # lista dos pedidos para aprovação diretoria
@@ -224,3 +225,13 @@ class PCFisList(GroupRequiredMixin, LoginRequiredMixin,ListView):
         self.object_list = PedidoCompra.objects.filter(status_oc='LIB', etapa_oc='3')
 
         return self.object_list
+
+# detalhes do pedido para aprovação ddo Fiscal
+class PCAnaliseFis(GroupRequiredMixin, LoginRequiredMixin,UpdateView):
+    login_url = reverse_lazy('login')
+    group_required = u'Fiscal'
+    model = PedidoCompra
+    fields=['motivo_fis'
+    ]
+    template_name = 'fluxo/form-analise.html'
+    success_url = reverse_lazy('lista-analise-fis-pc')

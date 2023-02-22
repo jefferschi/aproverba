@@ -35,7 +35,7 @@
             <td>{{ pc.data_aprov }}</td>
             <td>{{ pc.valor_aprov }}</td>
             <td>
-                <a href="{# url 'analise-aprova-pc' pc.pk #}" class="btn btn-warning btn-sm" title="Analisar PC"><i class="fa-solid fa-magnifying-glass-dollar"></i></a>
+                <a href="{% url 'analise-fis-pc' pc.pk %}" class="btn btn-warning btn-sm" title="Analisar PC"><i class="fa-solid fa-magnifying-glass-dollar"></i></a>
                 <a href=" {# url 'envia-aprova-pc' pc.pk #} " class="btn btn-success btn-sm" title="Aprovar PC"><i class="fa-solid fa-thumbs-up"></i></a>
                 <a href=" {# url 'index' pc.pk #} " class="btn btn-danger btn-sm" title="Negar ou Retornar PC"><i class="fa-solid fa-thumbs-down"></i></a>
             </td>
