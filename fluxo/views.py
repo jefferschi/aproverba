@@ -1,4 +1,6 @@
 #from django.shortcuts import render
+import pytz
+from django.utils import timezone
 
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
@@ -15,7 +17,6 @@ from braces.views import GroupRequiredMixin
 # redireciona o usuário depois de fazer algo
 from django.urls import reverse_lazy
 
-from django.utils import timezone
 
 
 ######################################################################################
@@ -158,7 +159,7 @@ class PCAprovaList(GroupRequiredMixin, LoginRequiredMixin,ListView):
 
         return self.object_list
 
-# detalhes do pedido para aprocação da diretoria
+# detalhes do pedido para aprovação da diretoria
 class PCAnaliseAprov(GroupRequiredMixin, LoginRequiredMixin,UpdateView):
     login_url = reverse_lazy('login')
     group_required = u'Aprovador'
@@ -167,6 +168,18 @@ class PCAnaliseAprov(GroupRequiredMixin, LoginRequiredMixin,UpdateView):
     ]
     template_name = 'fluxo/form-analise.html'
     success_url = reverse_lazy('lista-analise-pc')
+    timezone.activate(timezone='America/Sao_Paulo')
+
+
+    def form_valid(self, form):
+
+        timezone.activate(pytz.timezone('America/Sao_Paulo'))
+        form.instance.data_aprov = timezone.now()        
+
+        url = super().form_valid(form)
+
+        # objeto já criado 
+        return url
 
 # aprova e envia para Fiscal
 class PCAprova(GroupRequiredMixin, LoginRequiredMixin,UpdateView):
@@ -178,6 +191,8 @@ class PCAprova(GroupRequiredMixin, LoginRequiredMixin,UpdateView):
     success_url = reverse_lazy('lista-analise-pc')
 
     def form_valid(self, form):
+
+        timezone.activate(timezone='America/Sao_Paulo')
 
         # atribuir a próxima etapa e novo status à oc - vai para fiscal
         form.instance.data_aprov = timezone.now()
