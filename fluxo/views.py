@@ -1,6 +1,7 @@
 #from django.shortcuts import render
 import pytz
 from django.utils import timezone
+from datetime import datetime
 
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
@@ -168,38 +169,40 @@ class PCAnaliseAprov(GroupRequiredMixin, LoginRequiredMixin,UpdateView):
     ]
     template_name = 'fluxo/form-analise.html'
     success_url = reverse_lazy('lista-analise-pc')
-    timezone.activate(timezone='America/Sao_Paulo')
-
-
-    def form_valid(self, form):
-
-        timezone.activate(pytz.timezone('America/Sao_Paulo'))
-        form.instance.data_aprov = timezone.now()        
-
-        url = super().form_valid(form)
-
-        # objeto já criado 
-        return url
 
 # aprova e envia para Fiscal
 class PCAprova(GroupRequiredMixin, LoginRequiredMixin,UpdateView):
     login_url = reverse_lazy('login')
     group_required = u'Aprovador'
     model = PedidoCompra
-    fields=[]
+    fields=['data_aprov']
     template_name = 'fluxo/form-aprova-pc.html'
     success_url = reverse_lazy('lista-analise-pc')
 
     def form_valid(self, form):
 
-        timezone.activate(timezone='America/Sao_Paulo')
+        # a hora ainda salvando sem o fuso horário local no banco de dados, apesar de na rennderização 
+        # aparecer correta, verificar troca do formulário crispy pela criação de um arquivo 
+        # forms.py que herda forms de django. ver chatgpt
+        
+        # obter a hora local
+        timezone.activate(pytz.timezone('America/Sao_Paulo'))
+        hora_local = datetime.now(timezone.get_current_timezone())
+        # converter a hora local em UTC
+        hora_utc = hora_local.astimezone(timezone.utc)
+        form.instance.data_aprov = hora_utc
 
-        # atribuir a próxima etapa e novo status à oc - vai para fiscal
+        """
+        também não deu certo
+        timezone.activate(pytz.timezone('America/Sao_Paulo'))
         form.instance.data_aprov = timezone.now()
+        agora = datetime.utcnow()
+        """
+        # atribuir a próxima etapa e novo status à oc - vai para fiscal
         form.instance.etapa_oc = '3'
         form.instance.status_oc = 'LIB'
-        
 
+        
         url = super().form_valid(form)
 
         # objeto já criado 
