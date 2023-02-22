@@ -211,9 +211,9 @@ class PCAprova(GroupRequiredMixin, LoginRequiredMixin,UpdateView):
         return url
 
 
-#### aprovação fiscal
+#### classes para aprovação fiscal
 
-# lista dos pedidos para aprovação diretoria
+# lista dos pedidos para aprovação fiscal
 class PCFisList(GroupRequiredMixin, LoginRequiredMixin,ListView):
     login_url = reverse_lazy('login')
     group_required = u'Fiscal'
@@ -226,7 +226,7 @@ class PCFisList(GroupRequiredMixin, LoginRequiredMixin,ListView):
 
         return self.object_list
 
-# detalhes do pedido para aprovação ddo Fiscal
+# detalhes do pedido para aprovação do Fiscal
 class PCAnaliseFis(GroupRequiredMixin, LoginRequiredMixin,UpdateView):
     login_url = reverse_lazy('login')
     group_required = u'Fiscal'
@@ -235,3 +235,34 @@ class PCAnaliseFis(GroupRequiredMixin, LoginRequiredMixin,UpdateView):
     ]
     template_name = 'fluxo/form-analise.html'
     success_url = reverse_lazy('lista-analise-fis-pc')
+
+# fiscal aprova e envia para financeiro
+class PCAprovaFis(GroupRequiredMixin, LoginRequiredMixin,UpdateView):
+    login_url = reverse_lazy('login')
+    group_required = u'Fiscal'
+    model = PedidoCompra
+    fields=['data_fis']
+    template_name = 'fluxo/form-fis-pc.html'
+    success_url = reverse_lazy('lista-analise-fis-pc')
+
+    def form_valid(self, form):
+
+        # a hora ainda salvando sem o fuso horário local no banco de dados, apesar de na rennderização 
+        # aparecer correta, verificar troca do formulário crispy pela criação de um arquivo 
+        # forms.py que herda forms de django. ver chatgpt
+        
+        # obter a hora local
+        timezone.activate(pytz.timezone('America/Sao_Paulo'))
+        hora_local = datetime.now(timezone.get_current_timezone())
+        # converter a hora local em UTC
+        hora_utc = hora_local.astimezone(timezone.utc)
+        
+        form.instance.data_fis = hora_utc
+       
+        
+        # atribuir a próxima etapa, status permanece o mesmo - vai para financeiro
+        form.instance.etapa_oc = '4'
+        
+        url = super().form_valid(form)
+
+        return url

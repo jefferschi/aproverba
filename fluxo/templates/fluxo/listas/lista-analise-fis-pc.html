@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block titulo%}
-    <title>Análise Pedidos de Compra</title>
+    <title>Análise Ordem de Compra</title>
 {% endblock titulo%}
 
 {% block info_tela%}
@@ -11,7 +11,7 @@
 
 
 {% block conteudo %}
-<h3 style="margin-top: 5px;">Análise dos Pedidos de Compra</h3> 
+<h3 style="margin-top: 5px;">Análise das Ordens de Compra</h3> 
 <hr>
 <div class="table-responsive">
     <table class="table table-striped">
@@ -35,16 +35,16 @@
             <td>{{ pc.data_aprov }}</td>
             <td>{{ pc.valor_aprov }}</td>
             <td>
-                <a href="{% url 'analise-fis-pc' pc.pk %}" class="btn btn-warning btn-sm" title="Analisar PC"><i class="fa-solid fa-magnifying-glass-dollar"></i></a>
-                <a href=" {# url 'envia-aprova-pc' pc.pk #} " class="btn btn-success btn-sm" title="Aprovar PC"><i class="fa-solid fa-thumbs-up"></i></a>
-                <a href=" {# url 'index' pc.pk #} " class="btn btn-danger btn-sm" title="Negar ou Retornar PC"><i class="fa-solid fa-thumbs-down"></i></a>
+                <a href="{% url 'analise-fis-pc' pc.pk %}" class="btn btn-warning btn-sm" title="Analisar OC"><i class="fa-solid fa-magnifying-glass-dollar"></i></a>
+                <a href=" {% url 'envia-fis-pc' pc.pk %} " class="btn btn-success btn-sm" title="Liberar OC"><i class="fa-solid fa-thumbs-up"></i></a>
+                <a href=" {# url 'index' pc.pk #} " class="btn btn-danger btn-sm" title="Negar ou Retornar OC"><i class="fa-solid fa-thumbs-down"></i></a>
             </td>
 
         </tr>
 
         {% empty %}
         <tr>
-            <td colspan="7">Pedido de Compra não encontrado.</td>
+            <td colspan="7">Lista e OC vazia para liberação.</td>
         </tr>
         {% endfor%}
     </table>
