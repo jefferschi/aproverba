@@ -266,3 +266,29 @@ class PCAprovaFis(GroupRequiredMixin, LoginRequiredMixin,UpdateView):
         url = super().form_valid(form)
 
         return url
+
+
+#### classes para aprovação financeiro
+
+# lista dos pedidos para aprovação financeiro
+class PCFinList(GroupRequiredMixin, LoginRequiredMixin,ListView):
+    login_url = reverse_lazy('login')
+    group_required = u'Financeiro'
+    model = PedidoCompra
+    template_name = 'fluxo/listas/lista-analise-fin-pc.html'
+    
+    def get_queryset(self):
+        # pega todos os objetos em pedido de compra e atribui a object_list, usada na lista html, para fazer o filtro do status
+        self.object_list = PedidoCompra.objects.filter(status_oc='LIB', etapa_oc='4')
+
+        return self.object_list
+
+# detalhes do pedido para aprovação do Financeiro
+class PCAnaliseFin(GroupRequiredMixin, LoginRequiredMixin,UpdateView):
+    login_url = reverse_lazy('login')
+    group_required = u'Financeiro'
+    model = PedidoCompra
+    fields=['motivo_fin'
+    ]
+    template_name = 'fluxo/form-analise.html'
+    success_url = reverse_lazy('lista-analise-fin-pc')

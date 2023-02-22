@@ -31,7 +31,7 @@
     </div>
     <hr>
 
-    {% if object.etapa_oc == '3' or object.etapa_oc == '4' %}
+    {% if object.etapa_oc == '3' %}
     <div class="card">
         <div style="text-align: center; font-size: large; font-weight: bold;" class="card-header">
             Informações da aprovação
@@ -47,7 +47,20 @@
     <hr>
 
     {% elif object.etapa_oc == '4' %}
+    <div class="card">
+        <div style="text-align: center; font-size: large; font-weight: bold;" class="card-header">
+            Informações da aprovação
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item"> <b>Data da Aprovação:</b> {{ object.data_aprov }}</li>
+            <li class="list-group-item"> <b>Valor Aprovado:</b> R$ {{ object.valor_aprov }}</li>
+            <li class="list-group-item"> <b>Motivo:</b> {{ object.motivo_aprov }}</li>
 
+        </ul>
+
+    </div>
+    <hr>
+    
     <div class="card">
         <div style="text-align: center; font-size: large; font-weight: bold;" class="card-header">
             Informações do Fiscal

@@ -4,6 +4,7 @@ from .views import VerbaList, VerbaCreate, VerbaUpdate, VerbaDelete
 from .views import PCList, PCCreate, PCUpdate, PCDelete, PCEnvia
 from .views import PCAprovaList, PCAnaliseAprov, PCAprova
 from .views import PCFisList, PCAnaliseFis, PCAprovaFis
+from .views import PCFinList, PCAnaliseFin
 
 urlpatterns = [
 
@@ -29,5 +30,9 @@ urlpatterns = [
     path('pc/analise/fiscal/listar/', PCFisList.as_view(), name='lista-analise-fis-pc'),
     path('pc/analise/fiscal/<int:pk>', PCAnaliseFis.as_view(), name='analise-fis-pc'),
     path('pc/analise/fiscal/enviar/<int:pk>/', PCAprovaFis.as_view(), name='envia-fis-pc'),
+
+    # análises de PCs para financeiro
+    path('pc/analise/financeiro/listar/', PCFinList.as_view(), name='lista-analise-fin-pc'),
+    path('pc/analise/financeiro/<int:pk>', PCAnaliseFin.as_view(), name='analise-fin-pc'),
 
 ]
