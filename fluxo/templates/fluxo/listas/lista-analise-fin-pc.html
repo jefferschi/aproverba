@@ -35,7 +35,7 @@
             <td>{{ pc.valor_aprov }}</td>
             <td>
                 <a href="{% url 'analise-fin-pc' pc.pk %}" class="btn btn-warning btn-sm" title="Analisar OC"><i class="fa-solid fa-magnifying-glass-dollar"></i></a>
-                <a href=" {# url 'envia-fin-pc' pc.pk #} " class="btn btn-success btn-sm" title="Liberar OC"><i class="fa-solid fa-thumbs-up"></i></a>
+                <a href=" {% url 'envia-fin-pc' pc.pk %} " class="btn btn-success btn-sm" title="Finalizar OC"><i class="fa-solid fa-thumbs-up"></i></a>
                 <a href=" {# url 'index' pc.pk #} " class="btn btn-danger btn-sm" title="Negar ou Retornar OC"><i class="fa-solid fa-thumbs-down"></i></a>
             </td>
 

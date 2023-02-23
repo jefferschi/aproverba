@@ -292,3 +292,34 @@ class PCAnaliseFin(GroupRequiredMixin, LoginRequiredMixin,UpdateView):
     ]
     template_name = 'fluxo/form-analise.html'
     success_url = reverse_lazy('lista-analise-fin-pc')
+
+# financeiro aprova pagamento e finaliza oc
+class PCAprovaFin(GroupRequiredMixin, LoginRequiredMixin,UpdateView):
+    login_url = reverse_lazy('login')
+    group_required = u'Financeiro'
+    model = PedidoCompra
+    fields=['data_fin']
+    template_name = 'fluxo/form-fin-pc.html'
+    success_url = reverse_lazy('lista-analise-fin-pc')
+
+    def form_valid(self, form):
+
+        # a hora ainda salvando sem o fuso horário local no banco de dados, apesar de na rennderização 
+        # aparecer correta, verificar troca do formulário crispy pela criação de um arquivo 
+        # forms.py que herda forms de django. ver chatgpt
+        
+        # obter a hora local
+        timezone.activate(pytz.timezone('America/Sao_Paulo'))
+        hora_local = datetime.now(timezone.get_current_timezone())
+        # converter a hora local em UTC
+        hora_utc = hora_local.astimezone(timezone.utc)
+        
+        form.instance.data_fin = hora_utc
+       
+        
+        # atribuir a próxima etapa para finalização
+        form.instance.etapa_oc = '9'
+        
+        url = super().form_valid(form)
+
+        return url
