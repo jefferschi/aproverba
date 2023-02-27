@@ -57,6 +57,7 @@ class VerbaDelete(GroupRequiredMixin, LoginRequiredMixin,DeleteView):
     template_name = 'fluxo/form-excl.html'
     success_url = reverse_lazy('lista-verbas')
 
+
 ######################################################################################
 """ classes para Pedidos de Compra nível de acesso 'Solicitante' -  ListView, CreteView, UpdateView, DeleteView, """
 
@@ -323,3 +324,19 @@ class PCAprovaFin(GroupRequiredMixin, LoginRequiredMixin,UpdateView):
         url = super().form_valid(form)
 
         return url
+
+######################################################################################
+""" classes para Acompanhamento de OCs """
+
+# listar
+class OCAcompanhaList(GroupRequiredMixin, LoginRequiredMixin,ListView):
+    login_url = reverse_lazy('login')
+    group_required = u'Solicitante'
+    model = PedidoCompra
+    template_name = 'fluxo/listas/lista-acompanha-oc.html'
+
+    def get_queryset(self):
+        # pega todos os objetos em pedido de compra e atribui a object_list, usada na lista html, para fazer o filtro do status
+        self.object_list = PedidoCompra.objects.filter(usuario_log=self.request.user).exclude(status_oc='ABE')
+
+        return self.object_list

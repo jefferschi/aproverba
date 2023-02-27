@@ -5,6 +5,7 @@ from .views import PCList, PCCreate, PCUpdate, PCDelete, PCEnvia
 from .views import PCAprovaList, PCAnaliseAprov, PCAprova
 from .views import PCFisList, PCAnaliseFis, PCAprovaFis
 from .views import PCFinList, PCAnaliseFin, PCAprovaFin
+from .views import OCAcompanhaList
 
 urlpatterns = [
 
@@ -35,4 +36,8 @@ urlpatterns = [
     path('pc/analise/financeiro/listar/', PCFinList.as_view(), name='lista-analise-fin-pc'),
     path('pc/analise/financeiro/<int:pk>', PCAnaliseFin.as_view(), name='analise-fin-pc'),
     path('pc/analise/financeiro/enviar/<int:pk>/', PCAprovaFin.as_view(), name='envia-fin-pc'),
+
+    # acompanhamentos de ocs
+    path('oc/acompanha/listar/', OCAcompanhaList.as_view(), name='lista-acompanha-oc'),
+
 ]

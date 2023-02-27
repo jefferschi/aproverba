@@ -1,0 +1,53 @@
+{% extends 'paginas/base.html' %}
+{% load static %}
+
+{% block titulo%}
+    <title>Acompanhamento OCs</title>
+{% endblock titulo%}
+
+{% block info_tela%}
+
+{% endblock info_tela%}
+
+{% block conteudo %}
+<h3 style="margin-top: 5px;">Acompanhamento das OCs</h3>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <tr>
+            <th>OC</th>
+            <th>Data</th>
+            <th>Setor</th>
+            <th>Descrição</th>
+            <th>Valor Solic.</th>
+            <th>Valor Lib.</th>
+            <th>Etapa</th>
+            <th>Status</th>
+            <th>Visualizar</th>
+        </tr>
+        
+        {% for pc in object_list %}
+        <tr>
+            <td>#{{ pc.pk }}</td>
+            <td>{{ pc.data_solic }}</td>
+            <td>{{ pc.setor_oc }}</td>
+            <td>{{ pc.desc_solic }}</td>
+            <td>{{ pc.valor_solic }}</td>
+            <td>{{ pc.valor_aprov }}</td>
+            <td>{{ pc.etapa_oc }}</td>
+            <td>{{ pc.status_oc }}</td>
+            <td>
+                <a href="{# url 'alter-pc' pc.pk #}" class="btn btn-warning btn-sm" title="Alterar Pedido de compra"><i class="fa-solid fa-magnifying-glass"></i></a>
+
+
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="7">Não há ordens de compra em para este solicitante neste período.</td>
+        </tr>
+        {% endfor%}
+    </table>
+</div>
+
+{% endblock conteudo %}
