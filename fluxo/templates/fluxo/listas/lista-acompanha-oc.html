@@ -34,8 +34,8 @@
             <td>{{ pc.desc_solic }}</td>
             <td>{{ pc.valor_solic }}</td>
             <td>{{ pc.valor_aprov }}</td>
-            <td>{{ pc.etapa_oc }}</td>
-            <td>{{ pc.status_oc }}</td>
+            <td>{{ pc.get_etapa_oc_display }}</td>
+            <td>{{ pc.get_status_oc_display }}</td>
             <td>
                 <a href="{# url 'alter-pc' pc.pk #}" class="btn btn-warning btn-sm" title="Alterar Pedido de compra"><i class="fa-solid fa-magnifying-glass"></i></a>
 

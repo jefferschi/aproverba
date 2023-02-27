@@ -337,6 +337,6 @@ class OCAcompanhaList(GroupRequiredMixin, LoginRequiredMixin,ListView):
 
     def get_queryset(self):
         # pega todos os objetos em pedido de compra e atribui a object_list, usada na lista html, para fazer o filtro do status
-        self.object_list = PedidoCompra.objects.filter(usuario_log=self.request.user).exclude(status_oc='ABE')
+        self.object_list = PedidoCompra.objects.filter(usuario_log=self.request.user).exclude(status_oc='ABE').order_by('-data_solic')
 
         return self.object_list
